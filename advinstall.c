@@ -9,6 +9,8 @@ feature:
 - permette di specificare un persorso diverso con -p , -path
 - se gli viene passato un file sorgente lo compila (supporto principale per c e swift, file senza dipendenze)
 - permette di specificare il compilatore con -c 
+- installa se stesso con -self
+una versione verbose sarebbe utile
 
 utilizzo
 
@@ -49,12 +51,20 @@ int main(int argc, string argv[]){
 	while((argv--)>=0){
 		fork ecc
 	}*/
-	/*TODO: compilazione automatica*/
-	string bin = newstring(strlen(argv[1]));
-	strcpy(bin,argv[1]);
-	printf("%s\n",bin);
-	string ext = strrchr(argv[1],'.');
-	printf("%s\n",ext);
+
+	string bin;
+
+	/*flag -self, autoinstallazione*/
+	if(strcmp(argv[1],"-self")==0){
+		bin = newstring(12);
+		strcpy(bin,"advinstall.c");
+	} else {
+		bin = newstring(strlen(argv[1]));
+		strcpy(bin,argv[1]);
+	}
+	
+	/*compilazione automatica*/
+	string ext = strrchr(bin,'.');
 	if(ext!=NULL){
 
 		strcpy(bin,compile(bin,ext));
