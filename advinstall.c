@@ -40,7 +40,8 @@ int install (string bin, string path);
 /*  ext : la estensione del file            */
 string compile (string src, string ext);
 
-
+/*wrapper per rm*/
+int remove(string bin);
 
 int main(int argc, string argv[]){
 
@@ -77,9 +78,19 @@ int main(int argc, string argv[]){
 	/*installazione*/
 
 	int ret = install(bin,STD_PATH);
+	//cancella il binario creato temporanemente
+	ret += remove(bin);
 	return ret;
 };
 
+int remove(string bin){
+	string command = newstring(9+strlen(bin));
+	strcpy(command,"sudo rm ");
+	strcat(command, bin);
+	int ret = system(command);
+	free(command);
+	return ret;
+}
 
 int install(string bin, string path){
 	string command = newstring(15+strlen(bin)+strlen(path));
