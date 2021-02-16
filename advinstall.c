@@ -41,7 +41,7 @@ int install (string bin, string path);
 string compile (string src, string ext);
 
 /*wrapper per rm*/
-int remove(string bin);
+int _remove(string bin);
 
 int main(int argc, string argv[]){
 
@@ -79,11 +79,11 @@ int main(int argc, string argv[]){
 
 	int ret = install(bin,STD_PATH);
 	//cancella il binario creato temporanemente
-	ret += remove(bin);
+	ret += _remove(bin);
 	return ret;
 };
 
-int remove(string bin){
+int _remove(string bin){
 	string command = newstring(9+strlen(bin));
 	strcpy(command,"sudo rm ");
 	strcat(command, bin);

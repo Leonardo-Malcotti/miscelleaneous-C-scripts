@@ -27,12 +27,12 @@ int remove(string bin, string path);
 
 int main(int argc, string argv[]){
 
-	int ret = remove(argv[1],STD_PATH);
+	int ret = _remove(argv[1],STD_PATH);
 
-	return 0;
+	return ret;
 }
 
-int remove(string bin, string path){
+int _remove(string bin, string path){
 	string command = newstring(9+strlen(bin)+strlen(path));
 	strcpy(command,"sudo rm ");
 	strcat(command, path);
