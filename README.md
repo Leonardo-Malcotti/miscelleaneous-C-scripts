@@ -2,7 +2,7 @@
 
 Un vario insieme di programmi C più o meno utili che punta alla automazione di azioni comuni
 
-##Advinstall
+## Advinstall
 
 Advanced Install
 
@@ -20,7 +20,7 @@ utilizzo
 
 advinstall [-p|-c][arg flag][binaries...]
 
-##Advrm
+## Advrm
 
 Advanced Remove
 
@@ -34,7 +34,7 @@ usage:
 
 advrm [flag?] binario
 
-##Nprog
+## Nprog
 
 New Program
 
