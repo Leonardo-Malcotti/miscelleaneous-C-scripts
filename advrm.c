@@ -1,6 +1,6 @@
 #include<stdlib.h>
 #include<string.h>
-
+#include"utils.h"
 /*
 strumento per la rimozione di binari avanzato
 
@@ -17,9 +17,7 @@ advrm [flag?] binario
 #define STD_PATH "/usr/local/bin"
 #define C_COMPILER "gcc"
 #define SWIFT_COMPILER "swiftc"
-typedef char* string;
-typedef char bool;
-enum boolean{false,true};
+
 
 #define newstring(len) (char*)calloc(len,sizeof(char))
 

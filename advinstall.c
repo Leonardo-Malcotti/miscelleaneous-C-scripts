@@ -1,6 +1,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<stdio.h>
+#include"utils.h"
 /*
 strumento per l'installazione di binari avanzato
 
@@ -22,12 +23,7 @@ advinstall [-p|-c][arg flag][binaries...]
 #define STD_PATH "/usr/local/bin"
 #define C_COMPILER "gcc"
 #define SWIFT_COMPILER "swiftc"
-#define PROGNAME argv[0]
-typedef char* string;
-typedef char bool;
-enum boolean{false,true};
 
-#define newstring(len) (char*)calloc(len,sizeof(char))
 
 /*wrapper per il comando install.          */
 /*  bin : il nome del file.                */

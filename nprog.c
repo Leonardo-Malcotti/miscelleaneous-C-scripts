@@ -1,6 +1,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<stdio.h>
+#include"utils.h"
 
 /*
 strumento per la creazione di file con una struttura prefatta
@@ -18,7 +19,7 @@ nprog [tipo] nome[estensione] [flags]
 
 */
 
-
+/*
 typedef char* string;
 typedef char bool;
 enum boolean{false,true};
@@ -27,7 +28,7 @@ enum boolean{false,true};
 #define startWith(str,chr) (str[0]==chr)
 #define isFlag(str) startWith(str,'-')
 #define eql(str1,str2) (strcmp(str1,str2)==0)
-
+*/
 #define MAX_L_NAME 100
 
 //enum e typedef format/s servono a 
