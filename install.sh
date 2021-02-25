@@ -15,7 +15,7 @@ echo "per utilizzare gli script aggiungi /usr/local/bin al tuo path di sistema"
 rm advinstall.c 
 rm advrm.c 
 rm nprog.c 
-rm utils.c 
+rm utils.h
 rm advinstall
 
 exit 0

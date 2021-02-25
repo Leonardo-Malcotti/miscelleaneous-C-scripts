@@ -21,7 +21,7 @@ advrm [flag?] binario
 
 #define newstring(len) (char*)calloc(len,sizeof(char))
 
-int remove(string bin, string path);
+int _remove(string bin, string path);
 
 int main(int argc, string argv[]){
 
