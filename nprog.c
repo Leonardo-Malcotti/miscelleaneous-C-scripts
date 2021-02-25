@@ -26,7 +26,7 @@ nprog [tipo] nome[estensione] [flags]
 
 //enum e typedef format/s servono a 
 //determinare che tipo di file creare
-enum formats{nil,c,cpp,tex};
+enum formats{nil,c,cpp,tex,bash};
 typedef int format;
 format ofFormat(string str);
 FILE * createFile(string name, format f);
@@ -34,7 +34,8 @@ FILE * createFile(string name, format f);
 //Modelli file da creare
 //TODO: permettere l'aggiunta di argomenti variabili
 void writeC(FILE * f);
-void writeLaTex(FILE * f)
+void writeLaTex(FILE * f);
+void writeBash(FILE * f); //lo so che è un po' inutile, ma mi dimentico sempre come si fa
 
 //--------------------------------------------------------------------------------
 
@@ -96,6 +97,7 @@ int main(int argc, string argv[]){
 		case c : writeC(nfile);break;
 		case cpp : break;
 		case tex : writeLaTex(nfile);break;
+		case bash : writeBash(nfile);break;
 		default : break;
 	}
 
@@ -113,7 +115,7 @@ void writeLaTex(FILE * f){
 	fprintf(f, "\\documentclass[a4paper]{article}\n");
 	fprintf(f, "\\usepackage[T1]{fontenc}\n");
 	fprintf(f, "\\usepackage[utf8]{inputenc}\n");
-	fprintf(f, "\\usepackage[italian]{babel}\n");
+	fprintf(f, "\\usepackage[italian]{babel}\n\n");
 	fprintf(f, "\\begin{document}\n\n");
 	fprintf(f, "\\end{document}\n");
 }
@@ -128,6 +130,13 @@ void writeC(FILE * f){
 	fprintf(f, "%s%s",libs,mainF);
 }
 
+/*
+"Modello" per uno script bash, lol
+*/
+void writeBash(FILE * f){
+	fprintf(f, "#!/bin/bash\n\nexit 0\n");
+}
+
 //---------------------------------------------------------------------------------
 
 
@@ -139,6 +148,7 @@ FILE * createFile(string name, format f){
 		case c : strcat(fullName,".c");break;
 		case cpp : strcat(fullName,".cpp");break;
 		case tex : strcat(fullName,".tex");break;
+		case bash : strcat(fullName,".sh");break;
 		default : break;
 	}
 
@@ -158,6 +168,9 @@ format ofFormat(string str){
 	}
 	if(eql(str,"-tex")){
 		return tex;
+	}
+	if(eql(str,"-bash")){
+		return bash;
 	}
 
 	return nil;
