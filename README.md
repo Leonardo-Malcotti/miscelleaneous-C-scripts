@@ -2,6 +2,13 @@
 
 Un vario insieme di programmi C più o meno utili che punta alla automazione di azioni comuni
 
+### Install
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Leonardo-Malcotti/miscelleaneous-C-scripts/master/install.sh)"
+```
+
+
 ## Advinstall
 
 Advanced Install
