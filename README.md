@@ -50,3 +50,7 @@ feature:
 utilizzo
 
 nprog [tipo] nome[estensione] [flags]
+
+## utils.h
+
+Header contenente alcune macro e costanti utili.
