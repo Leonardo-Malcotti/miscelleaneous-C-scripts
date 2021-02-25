@@ -19,28 +19,24 @@ nprog [tipo] nome[estensione] [flags]
 
 */
 
-/*
-typedef char* string;
-typedef char bool;
-enum boolean{false,true};
-#define PROGNAME argv[0]
-#define newstring(len) (char*)calloc(len,sizeof(char))
-#define startWith(str,chr) (str[0]==chr)
-#define isFlag(str) startWith(str,'-')
-#define eql(str1,str2) (strcmp(str1,str2)==0)
-*/
+//--------------------------------------------------------------------------------
+
 #define MAX_L_NAME 100
+#define MAX_EXT_LEN 5
 
 //enum e typedef format/s servono a 
 //determinare che tipo di file creare
-enum formats{nil,c,cpp};
+enum formats{nil,c,cpp,tex};
 typedef int format;
 format ofFormat(string str);
-
 FILE * createFile(string name, format f);
 
+//Modelli file da creare
 //TODO: permettere l'aggiunta di argomenti variabili
 void writeC(FILE * f);
+void writeLaTex(FILE * f)
+
+//--------------------------------------------------------------------------------
 
 int main(int argc, string argv[]){
 
@@ -53,7 +49,6 @@ int main(int argc, string argv[]){
 	bool name_contr = true;
 	format F = nil;
 	string nomeFile = newstring(MAX_L_NAME);
-	//errore se non ci sono argomenti
 	
 	/*
 	Lettura argomenti
@@ -100,6 +95,7 @@ int main(int argc, string argv[]){
 	switch(F){
 		case c : writeC(nfile);break;
 		case cpp : break;
+		case tex : writeLaTex(nfile);break;
 		default : break;
 	}
 
@@ -107,21 +103,42 @@ int main(int argc, string argv[]){
 	return 0;
 }
 
-void writeC(FILE * f){
-	string libs = "#include<stdlib.h>\n#include<string.h>\n#include<stdio.h>\n\n";
-	string defines = "typedef char* string;\ntypedef char bool;\nenum boolean{false,true};\n#define PROGNAME argv[0]\n#define newstring(len) (char*)calloc(len,sizeof(char))\n#define startWith(str,chr) (str[0]==chr)\n\n";
-	string mainF = "int main(int argc, string argv[]){\n\n	return 0;\n}\n\n";
+//--------------------------------------------------------------------------------
 
-	fprintf(f, "%s%s%s",libs,defines,mainF);
+
+/*
+Modello per i file latex
+*/
+void writeLaTex(FILE * f){
+	fprintf(f, "\\documentclass[a4paper]{article}\n");
+	fprintf(f, "\\usepackage[T1]{fontenc}\n");
+	fprintf(f, "\\usepackage[utf8]{inputenc}\n");
+	fprintf(f, "\\usepackage[italian]{babel}\n");
+	fprintf(f, "\\begin{document}\n\n");
+	fprintf(f, "\\end{document}\n");
 }
 
+/*
+Modello per i file C
+*/
+void writeC(FILE * f){
+	string libs = "#include<stdlib.h>\n#include<string.h>\n#include<stdio.h>\n\n";
+	string mainF = "int main(int argc, string argv[]){\n\n	return 0;\n}\n\n";
+
+	fprintf(f, "%s%s",libs,mainF);
+}
+
+//---------------------------------------------------------------------------------
+
+
 FILE * createFile(string name, format f){
-	string fullName = newstring(strlen(name)+5);
+	string fullName = newstring(strlen(name)+MAX_EXT_LEN);
 	strcpy(fullName,name);
 
 	switch(f){
 		case c : strcat(fullName,".c");break;
 		case cpp : strcat(fullName,".cpp");break;
+		case tex : strcat(fullName,".tex");break;
 		default : break;
 	}
 
@@ -139,7 +156,9 @@ format ofFormat(string str){
 	if(eql(str,"-cpp")){
 		return cpp;
 	}
-
+	if(eql(str,"-tex")){
+		return tex;
+	}
 
 	return nil;
 }
