@@ -1,9 +1,9 @@
 #!/bin/bash
-sudo
+
 curl -fsSL https://raw.githubusercontent.com/Leonardo-Malcotti/miscelleaneous-C-scripts/master/advinstall.c >> advinstall.c
 curl -fsSL https://raw.githubusercontent.com/Leonardo-Malcotti/miscelleaneous-C-scripts/master/advrm.c >> advrm.c 
 curl -fsSL https://raw.githubusercontent.com/Leonardo-Malcotti/miscelleaneous-C-scripts/master/nprog.c >> nprog.c 
-curl -fsSL https://raw.githubusercontent.com/Leonardo-Malcotti/miscelleaneous-C-scripts/master/utils.h >> utils.c 
+curl -fsSL https://raw.githubusercontent.com/Leonardo-Malcotti/miscelleaneous-C-scripts/master/utils.h >> utils.h 
 
 gcc advinstall.c -o advinstall
 ./advinstall advrm.c 
