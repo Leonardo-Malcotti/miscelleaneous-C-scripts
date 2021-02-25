@@ -16,6 +16,5 @@ rm advinstall.c
 rm advrm.c 
 rm nprog.c 
 rm utils.h
-rm advinstall
 
 exit 0
