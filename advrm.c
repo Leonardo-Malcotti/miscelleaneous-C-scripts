@@ -21,16 +21,16 @@ advrm [flag?] binario
 
 #define newstring(len) (char*)calloc(len,sizeof(char))
 
-int _remove(string bin, string path);
+int f_remove(string bin, string path);
 
 int main(int argc, string argv[]){
 
-	int ret = _remove(argv[1],STD_PATH);
+	int ret = f_remove(argv[1],STD_PATH);
 
 	return ret;
 }
 
-int _remove(string bin, string path){
+int f_remove(string bin, string path){
 	string command = newstring(9+strlen(bin)+strlen(path));
 	strcpy(command,"sudo rm ");
 	strcat(command, path);
