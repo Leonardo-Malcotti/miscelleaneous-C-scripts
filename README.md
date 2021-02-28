@@ -76,3 +76,7 @@ nprog [tipo] nome[estensione] [flags]
 
 Header contenente alcune macro e costanti utili.
 
+
+## Esempio di workflow
+
+![Alt text](https://github.com/Leonardo-Malcotti/miscelleaneous-C-scripts/blob/master/c%20dep-2.png)
