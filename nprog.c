@@ -125,7 +125,17 @@ Modello per i file C
 */
 void writeC(FILE * f){
 	string libs = "#include<stdlib.h>\n#include<string.h>\n#include<stdio.h>\n\n";
-	string mainF = "int main(int argc, string argv[]){\n\n	return 0;\n}\n\n";
+	string mainF = "int main(int argc, char *argv[]){\n\n	return 0;\n}\n\n";
+
+	fprintf(f, "%s%s",libs,mainF);
+}
+
+/*
+Modello per i file Cpp
+*/
+void writeCpp(FILE * f){
+	string libs = "#include<iostream>\n\nusing namespace std;\n\n";
+	string mainF = "int main(int argc, cahr *argv[]){\n\n	return 0;\n}\n\n";
 
 	fprintf(f, "%s%s",libs,mainF);
 }
