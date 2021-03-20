@@ -26,7 +26,7 @@ nprog [tipo] nome[estensione] [flags]
 
 //enum e typedef format/s servono a 
 //determinare che tipo di file creare
-enum formats{nil,c,cpp,tex,bash};
+enum formats{nil,c,cpp,tex,bash,h};
 typedef int format;
 format ofFormat(string str);
 FILE * createFile(string name, format f);
@@ -36,6 +36,8 @@ FILE * createFile(string name, format f);
 void writeC(FILE * f);
 void writeLaTex(FILE * f);
 void writeBash(FILE * f); //lo so che è un po' inutile, ma mi dimentico sempre come si fa
+void writeCpp(FILE * f);
+void writeH(FILE * f, string name);
 
 //--------------------------------------------------------------------------------
 
@@ -83,9 +85,10 @@ int main(int argc, string argv[]){
 	*/
 
 	FILE * nfile = createFile(nomeFile,F);
-	free(nomeFile);
+	
 	if(nfile == NULL){
 		printf("%s: failed to create file\n", PROGNAME);
+		free(nomeFile);
 		exit(1);
 	}
 
@@ -95,12 +98,14 @@ int main(int argc, string argv[]){
 
 	switch(F){
 		case c : writeC(nfile);break;
-		case cpp : break;
+		case cpp : writeCpp(nfile);break;
 		case tex : writeLaTex(nfile);break;
 		case bash : writeBash(nfile);break;
+		case h : writeH(nfile,nomeFile);break;
 		default : break;
 	}
 
+	free(nomeFile);
 	fclose(nfile);
 	return 0;
 }
@@ -147,6 +152,15 @@ void writeBash(FILE * f){
 	fprintf(f, "#!/bin/bash\n\nexit 0\n");
 }
 
+/*
+Modello per un header
+*/
+void writeH(FILE * f, string name){
+	fprintf(f, "#ifndef __%s_H__\n",strToUpper(name));
+	fprintf(f, "#define __%s_H__\n",strToUpper(name));
+	fprintf(f, "\n\n#endif\n");
+}
+
 //---------------------------------------------------------------------------------
 
 
@@ -159,6 +173,7 @@ FILE * createFile(string name, format f){
 		case cpp : strcat(fullName,".cpp");break;
 		case tex : strcat(fullName,".tex");break;
 		case bash : strcat(fullName,".sh");break;
+		case h : strcat(fullName,".h");break;
 		default : break;
 	}
 
@@ -181,6 +196,9 @@ format ofFormat(string str){
 	}
 	if(eql(str,"-bash")){
 		return bash;
+	}
+	if(eql(str,"-h")){
+		return h;
 	}
 
 	return nil;
